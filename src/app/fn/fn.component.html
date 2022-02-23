@@ -1,0 +1,8 @@
+<app-operator [operator]="operator" [isFn]="true"
+  (changeOperator)="changeOperator.emit({operator: $event, isFn: true})">
+</app-operator>
+<ng-container *ngIf="showParen">(</ng-container>
+<ng-container *ngFor="let arg of tree.arguments">
+  <app-node [node]="arg" [isArg]="true"></app-node>
+</ng-container>
+<ng-container *ngIf="showParen">)</ng-container>

@@ -1,0 +1,8 @@
+<div class="tree">
+    <ng-container *ngIf="isParen && showParen">(</ng-container>
+    <app-node *ngIf="tree.left" [node]="tree?.left"></app-node>
+    <app-operator [operator]="operator" (changeOperator)="changeOperator.emit({operator: $event, isFn: false})">
+    </app-operator>
+    <app-node *ngIf="tree.right" [node]="tree?.right"></app-node>
+    <ng-container *ngIf="isParen && showParen">)</ng-container>
+</div>

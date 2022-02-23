@@ -1,0 +1,9 @@
+<span *ngIf="node" [ngSwitch]="node.type" class="node">
+  <ng-container *ngSwitchCase="number">{{node.value}}</ng-container>
+  <ng-container *ngSwitchCase="variable">
+    <input class="input" [formControl]="formGroup.get(node.name)" type="text" [attr.placeholder]="node.name">
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <app-visualizer [syntaxTree]="node" [isArg]="isArg"></app-visualizer>
+  </ng-container>
+</span>

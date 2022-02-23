@@ -1,0 +1,37 @@
+<ng-container *ngIf="ready">
+  <div class="main" [class.paren]="isParen">
+
+    <ng-container *ngTemplateOutlet="isFn ? fnTmpl : binaryTmpl; context: {tree: this._syntaxTree}">
+    </ng-container>
+
+    <ng-template #fnTmpl let-tree="tree">
+      <span class="operator">{{ operator }}</span>
+      (<ng-container *ngFor="let arg of tree.arguments">
+        <ng-container *ngTemplateOutlet="nodeTemplate; context: {node: arg}">
+        </ng-container>
+      </ng-container>)
+    </ng-template>
+
+    <ng-template #binaryTmpl let-tree="tree">
+      <ng-container *ngIf="isParen">(</ng-container>
+      <ng-container *ngTemplateOutlet="nodeTemplate; context: {node: tree?.left}">
+      </ng-container>
+      <span class="operator">{{ operator }}</span>
+      <ng-container *ngTemplateOutlet="nodeTemplate; context: {node: tree?.right}">
+      </ng-container>
+      <ng-container *ngIf="isParen">)</ng-container>
+    </ng-template>
+  </div>
+</ng-container>
+
+<ng-template #nodeTemplate let-node="node">
+  <ng-container>
+    <span [ngSwitch]="node?.type">
+      <ng-container *ngSwitchCase="number">{{node?.value}}</ng-container>
+      <ng-container *ngSwitchCase="variable">{{node?.name}}</ng-container>
+      <ng-container *ngSwitchDefault>
+        <app-recursive-operator [syntaxTree]="node"></app-recursive-operator>
+      </ng-container>
+    </span>
+  </ng-container>
+</ng-template>

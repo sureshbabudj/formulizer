@@ -1,0 +1,13 @@
+<label class="dropdown">
+
+  <div class="dd-button">
+    Add +
+  </div>
+
+  <input type="checkbox" class="dd-input" id="test" checked>
+
+  <ul class="dd-menu">
+    <li *ngFor="let value of values" (click)="selectItem(value)">{{value}}</li>
+  </ul>
+
+</label>

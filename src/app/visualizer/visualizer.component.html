@@ -1,0 +1,29 @@
+<div class="main" #mainEl *ngIf="ready" [class.paren]="isParen" [ngStyle]="{'background-color': bgColor}"
+  (click)="highlight($event)">
+
+  <ng-container *ngTemplateOutlet="isFn ? fnTmpl : binaryTmpl; context: {tree: this._syntaxTree}">
+  </ng-container>
+
+  <ng-template #fnTmpl let-tree="tree">
+    <app-fn [operator]="operator" [tree]="tree" (changeOperator)="onChangeOperator($event)"></app-fn>
+  </ng-template>
+
+  <ng-template #binaryTmpl let-tree="tree">
+    <app-tree [operator]="operator" [tree]="tree" [isParen]="isParen" (changeOperator)="onChangeOperator($event)">
+    </app-tree>
+  </ng-template>
+
+  <div class="actions" *ngIf="highlighter()">
+    <button>?</button>
+    <button class="addButton" (click)="toggleAddNewDropdown()">&#43;</button>
+    <button class="delButton" *ngIf="!isArg" (click)="remove()">&#215;</button>
+  </div>
+
+
+  <div id="overlay" *ngIf="isRoot && dataService.showAddNewDropdown">
+    <div class="popup">
+      <app-dropdown [values]="dropdownValues" (select)="addNew($event)"></app-dropdown>
+    </div>
+  </div>
+
+</div>

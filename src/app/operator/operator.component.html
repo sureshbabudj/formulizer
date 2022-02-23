@@ -1,0 +1,7 @@
+<span class="operator">
+  <select (change)="onChangeOperator($event)">
+    <option *ngFor="let opt of operators" [value]="opt" [selected]="opt === operator">
+      {{opt}}
+    </option>
+  </select>
+</span>

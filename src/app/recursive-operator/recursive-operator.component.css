@@ -1,0 +1,13 @@
+:host .main {
+  margin-right: 1rem;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+:host .main.paren {
+  /* abackground-color: #ccc; */
+}
+
+:host .main:last-child {
+  margin-right: 0;
+}
